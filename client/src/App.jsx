@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import toast from 'react-hot-toast';
 
 const App = () => {
 
@@ -10,10 +11,13 @@ const App = () => {
     try {
       e.preventDefault();
 
-      const response = await axios.post("http://localhost:3000/adduser", {
+      const response = await axios.post("http://localhost:3000/addproduct", {
         productName
       });
-      console.log(response);
+      console.log(response.data.message);
+      toast.success(response.data.message)
+
+      setProductName("");
     }
     catch (err) {
       console.log("Error :", err);
