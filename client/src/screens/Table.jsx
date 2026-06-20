@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import toast from 'react-hot-toast';
 const Table = () => {
 
     const [products, setProducts] = useState([]);
     const [editingProductId, setEditingProductId] = useState(null);
     const [updateProductName, setUpdateProductName] = useState("");
+    // Re-Render Process ko proces karne ke liye hai
+    const [refresh, setRefresh] = useState(false);
 
     const getProducts = async () => {
         try {
@@ -21,7 +24,7 @@ const Table = () => {
 
     useEffect(() => {
         getProducts();
-    }, [])
+    }, [refresh])
 
 
     // Edit BTN
@@ -41,6 +44,27 @@ const Table = () => {
 
             console.log(response);
             setEditingProductId(null);
+
+            setRefresh(!refresh);
+            toast.success(response.data.message)
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+    // Delete Product Operation
+    const handleDelete = async (id) => {
+        try {
+            const response = await axios.delete(`http://localhost:3000/deleteproduct/${id}`);
+
+            console.log(response);
+
+            setRefresh(!refresh);
+            toast.success(response.data.message, {
+                iconTheme: {
+                    primary: "red"
+                }
+            });
         }
         catch (err) {
             console.log(err);
@@ -62,7 +86,7 @@ const Table = () => {
                     </thead>
                     <tbody>
                         {products.map((p, i) => (
-                            <tr>
+                            <tr key={i}>
                                 <th>{i + 1}</th>
                                 <td>
 
@@ -82,7 +106,7 @@ const Table = () => {
                                         :
                                         <>
                                             <button className="btn btn-soft btn-info" onClick={() => handleEdit(p)}>Edit</button>
-                                            <button className="btn btn-soft btn-error">Delete</button>
+                                            <button className="btn btn-soft btn-error" onClick={() => handleDelete(p._id)}>Delete</button>
                                         </>
                                     }
 
