@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 const productImagesSchema = new mongoose.Schema({
-    product_image: {
-        type: "String",
-        required: true
+    product_image : {
+        type : "String",
+        required : true
     }
 });
 

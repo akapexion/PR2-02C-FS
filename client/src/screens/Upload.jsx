@@ -12,7 +12,7 @@ const Upload = () => {
     formData.append("image", image);
 
     try {
-      const response = await axios.post("http://localhost:3000/uploadImage", formData);
+      const response = await axios.post("http://localhost:3000/uploadProductImage", formData);
 
       console.log(response);
     }
@@ -27,7 +27,8 @@ const Upload = () => {
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">Settings</legend>
           <div className="join">
-            <input type="file" className="input join-item" placeholder="Product Image" onChange={(e) => setImage(e.target.files[0])} />
+            <input type="file" className="input join-item" placeholder="Product Image"
+              onChange={(e) => setImage(e.target.files[0])} />
             <button className="btn join-item">save</button>
           </div>
         </fieldset>
@@ -35,5 +36,4 @@ const Upload = () => {
     </>
   )
 }
-
 export default Upload
