@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Table from './screens/Table'
 import Upload from './screens/Upload'
 import Register from './screens/Register'
+import Login from './screens/Login'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/add" element={<Form />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>

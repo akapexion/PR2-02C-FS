@@ -21,6 +21,10 @@ const Register = () => {
             });
 
             console.log(response);
+
+            setName("");
+            setEmail("");
+            setPassword("");
         }
         catch (err) {
             console.log(err);
